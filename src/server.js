@@ -12,7 +12,7 @@ const port = process.env.PORT || 5001;
 const app = express();
 
 const syncTables = () => {
-    sequelize.sync({alter: true});
+    // sequelize.sync({alter: true});
     User.sync()
 };
 

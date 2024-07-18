@@ -24,8 +24,13 @@ const comparePass = async (req, res, next) => {
     try {
 
          const user = await User.findOne({where: {username: req.body.username}});
+          const match = await bcrypt.compare(req.body.password, user.password);
+          console.log (match)
 
-         req.user = user;
+           if (!match) {
+             return res.status(404).json({ message: "incorrect password" });
+           }
+        req.user = user;
 
         next();
     } catch (error) {

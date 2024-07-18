@@ -4,8 +4,10 @@ const userRouter = Router();
 const {register, login, getAllUsers} = require("./controllers");
 const {validateRegister, validateLogin} = require("../middleware/validation");
 
-userRouter.post("/register", register);
-userRouter.post("/login", login);
+const {hashPass, comparePass} = require("../middleware/auth");
+
+userRouter.post("/register", hashPass, register);
+userRouter.post("/login",comparePass, login);
 
 userRouter.get("/getAllUsers", getAllUsers);
 module.exports = userRouter;

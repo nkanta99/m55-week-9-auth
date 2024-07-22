@@ -1,10 +1,11 @@
-const User = require("./model");
+const User = require("./models");
 
 const register = async (req, res) => {
     try {
         const user = await User.create(req.body);
 
         res.status(201).json({message: "success", user});
+       
     } catch (error) {
         res.status(500).json({message: error.message, error: error});
     }
@@ -12,7 +13,8 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        res.status(201).json({message: "success", user: req.body});
+
+        res.status(201).json({message: "success", user: req.user});
     } catch (error) {
         res.status(500).json({message: error.message, error: error});
     }
